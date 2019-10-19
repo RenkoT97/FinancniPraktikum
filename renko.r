@@ -26,25 +26,21 @@ colnames(tabela3) <- tabela3[1,]
 tabela3 <- tabela3[-1, ]
 tabela3 <- tabela3[c(1,23,44,66,85,107,128,150,173,193,216,238),]
 
-tabela <- rbind(tabela1,tabela2)
-tabela <- rbind(tabela,tabela3)
-tabelaLTU <- tabela[,c(6,12)]
-colnames(tabelaLTU) <- c("polletna", "enoletna")
 U<-12
 T<-6
 n<-36
-tabelaLTU[,1] <- as.numeric(tabelaLTU[,1])
-tabelaLTU[,2] <- as.numeric(tabelaLTU[,2])
 
+tabela <- rbind(tabela1,tabela2)
+tabela <- rbind(tabela,tabela3)
+
+tab1c <- tabela[,c(6,12)]
+graf1c <- ts.plot(tab1c, xlab="meseci", ylab="obrestne mere")
+  
+tabelaLTU <- tabela[,c(6,12)]
 tabelaLTU <- as.numeric(tabelaLTU)
 sapply(tabelaLTU, class)
 
-terminskeobrestnemere <- rep(1,n)/(U-T)*((rep(1,n)+U*(tabelaLTU[,2]))/(rep(1,n)+T*(tabelaLTU[,1]))-rep(1,n))
+polletna <- tabelaLTU[1:n]
+enoletna <- tail(tabelaLTU,n)
 
-
-
-#ts.plot(tabelaLTU, xlab="meseci", ylab="obrestne mere")
-
-# U teèe od 12. meseca do konca, T teèe od šestega do tridesetega meseca
-# L(0,T,U) je danes dogovorjena obrestna mera za transakcijo, ki se priène v èasu T in konèa v èasu U.
-#Graf: L(0,T,U) = L(0,6,12)
+terminskeobrestnemere <- rep(1,n)/(U-T)*((rep(1,n)+U*(enoletna))/(rep(1,n)+T*(polletna))-rep(1,n))
