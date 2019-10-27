@@ -34,8 +34,15 @@ tabela <- rbind(tabela1,tabela2)
 tabela <- rbind(tabela,tabela3)
 
 tab1c <- tabela[,c(6,12)]
-graf1c <- ts.plot(tab1c, xlab="meseci", ylab="obrestne mere")
-  
+colnames(tab1c) <- c("L(0,6)","L(0,12)")
+grafc1 <- ts.plot(tab1c, xlab="meseci", ylab="obrestne mere", lty=c(1:3))
+legend(legend=colnames(tab1c))
+
+#izbrani datumi
+
+A <- 2
+
+''' 
 tabelaLTU <- tabela[,c(6,12)]
 tabelaLTU <- as.numeric(tabelaLTU)
 sapply(tabelaLTU, class)
@@ -44,3 +51,4 @@ polletna <- tabelaLTU[1:n]
 enoletna <- tail(tabelaLTU,n)
 
 terminskeobrestnemere <- rep(1,n)/(U-T)*((rep(1,n)+U*(enoletna))/(rep(1,n)+T*(polletna))-rep(1,n))
+'''
