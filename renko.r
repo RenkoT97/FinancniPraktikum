@@ -35,12 +35,19 @@ tabela <- rbind(tabela,tabela3)
 
 tab1c <- tabela[,c(6,12)]
 colnames(tab1c) <- c("L(0,6)","L(0,12)")
-grafc1 <- ts.plot(tab1c, xlab="meseci", ylab="obrestne mere", lty=c(1:3))
-legend(legend=colnames(tab1c))
+grafc1 <- ts.plot(tab1c,
+                  gpars = list(xlab="meseci", ylab="obrestne mere", lty = c(1:3)))
+legend("topright", colnames(tab1c), lty = c(1:3))
 
-#izbrani datumi
+#Izbrani datumi: 01.04.2010, 01.07.2011, 01.08.2012
+#Vse obrestne mere narašèajo konkavno, a skoraj linearno
 
-A <- 2
+tab2a <- tabela[c("X01.04.2010", "X01.07.2011", "X01.08.2012"),]
+tab2a <- t(tab2a)
+colnames(tab2a) <- c("01.04.2010", "01.07.2011", "01.08.2012")
+graf2a <- ts.plot(tab2a,
+                  gpars = list(xlab = "meseci", ylab = "obrestne mere", lty = c(1:3)))
+legend("topright",colnames(tab2a), lty = c(1:3))
 
 ''' 
 tabelaLTU <- tabela[,c(6,12)]
