@@ -1,5 +1,6 @@
 library(readr)
 library(dplyr)
+library(ggplot2)
 
 tabela1 <- read.csv("https://raw.githubusercontent.com/RenkoT97/FinancniPraktikum/master/hist_EURIBOR_2010.csv", stringsAsFactors=FALSE)
 tabela2 <- read.csv("https://raw.githubusercontent.com/RenkoT97/FinancniPraktikum/master/hist_EURIBOR_2011.csv", stringsAsFactors=FALSE)
@@ -49,7 +50,6 @@ graf2a <- ts.plot(tab2a,
                   gpars = list(xlab = "meseci", ylab = "obrestne mere", lty = c(1:3)))
 legend("topright",colnames(tab2a), lty = c(1:3))
 
-''' 
 tabelaLTU <- tabela[,c(6,12)]
 tabelaLTU <- as.numeric(tabelaLTU)
 sapply(tabelaLTU, class)
@@ -58,4 +58,13 @@ polletna <- tabelaLTU[1:n]
 enoletna <- tail(tabelaLTU,n)
 
 terminskeobrestnemere <- rep(1,n)/(U-T)*((rep(1,n)+U*(enoletna))/(rep(1,n)+T*(polletna))-rep(1,n))
-'''
+
+tab3b <- as.data.frame(tabela[,12])
+colnames(tab3b) <- "opazovano"
+tab3b$terminskeobrestnemere <- terminskeobrestnemere
+graf3b <- ggplot(data.frame())+ aes(x=tab3b$"terminskeobrestnemere", y=tab3b$"opazovano")+
+  geom_point(show.legend = TRUE, aes(colour = factor(cyl)))+
+  xlab("napoved")+ylab("opazovano")
+print(graf3b)
+
+                 
