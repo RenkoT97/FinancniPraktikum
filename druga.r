@@ -1,0 +1,1 @@
+podatki <- read.delim(sep = "\t", dec = ".")
